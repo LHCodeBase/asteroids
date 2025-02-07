@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import pygame
 from circleshape import CircleShape
 from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED
@@ -29,11 +30,11 @@ class Player(CircleShape):
     def update(self, dt):
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_a] or keys[pygame.K_LEFT]:
+        if keys[pygame.K_a] or keys[pygame.K_LEFT] or keys[pygame.K_h]:
             # rotate "left" counter-clockwise
             self.rotate(dt * -1)
 
-        if keys[pygame.K_d or keys[pygame.K_RIGHT]]:
+        if keys[pygame.K_d] or keys[pygame.K_RIGHT] or keys[pygame.K_k]:
             # rotate "right" clockwise
             self.rotate(dt)
         pass
