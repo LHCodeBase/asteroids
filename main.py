@@ -1,6 +1,8 @@
 import pygame
 from constants import *
 from player import Player
+if DEBUG:
+    import debug
 
 def main():
     print(f"Screen width: {SCREEN_WIDTH}")
@@ -28,6 +30,8 @@ def main():
         screen.fill('black') # NOTE: rgb should be 255, 0, 0 or '#ffffff'
         player.draw(screen)
         player.update(dt)
+
+        debug.show_variables(screen)
 
         pygame.display.flip() # Render screen
 
