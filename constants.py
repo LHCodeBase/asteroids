@@ -11,5 +11,4 @@ PLAYER_TURN_SPEED = 300
 PLAYER_SPEED = 200
 
 DEBUG = True
-FONT = pygame.font.Font(None, 24)
 DEBUG_TEXT_COLOR = (255, 0, 0)

@@ -9,8 +9,14 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
     pygame.init()
 
+    # Set clock
     clock = pygame.time.Clock()
     dt = 0
+
+    # Set initial groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
 
     # Set initial screen size
     keepGoing = True
@@ -28,8 +34,11 @@ def main():
 
         # Background
         screen.fill('black') # NOTE: rgb should be 255, 0, 0 or '#ffffff'
-        player.draw(screen)
-        player.update(dt)
+
+        for d in drawable:
+            d.draw(screen)
+        for u in updatable:
+            u.update(dt)
 
         debug.show_variables(screen)
 

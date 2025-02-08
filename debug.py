@@ -1,5 +1,5 @@
 import pygame
-from constants import FONT, DEBUG_TEXT_COLOR 
+from constants import DEBUG_TEXT_COLOR 
 
 pygame.font.init()
 FONT = pygame.font.Font(None, 24)
