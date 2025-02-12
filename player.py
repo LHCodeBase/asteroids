@@ -51,4 +51,9 @@ class Player(CircleShape):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * dt
 
+    def isColliding(self, other: CircleShape) -> bool:
+        if self.position.distance_to(other.position) <= (self.radius + other.radius):
+            return True
+        return False
+        pass
 

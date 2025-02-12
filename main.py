@@ -47,6 +47,12 @@ def main():
         for u in updatable:
             u.update(dt)
 
+        # Check for player collision
+        if any([player.isColliding(a) for a in asteroids if asteroids]):
+            print("Game over!")
+            pygame.quit()
+            break;
+
         debug.show_variables(screen)
 
         pygame.display.flip() # Render screen
