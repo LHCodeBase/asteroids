@@ -4,12 +4,12 @@ from circleshape import CircleShape
 from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED
 
 class Player(CircleShape):
-    def __init__(self, x: int, y: int):
+    def __init__(self, x: int, y: int) -> None:
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         pass
 
-    def triangle(self):
+    def triangle(self) -> list[tuple[int, int]]:
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         right = pygame.Vector2(0, 1).rotate(self.rotation + 90) * \
                 self.radius / 1.5
@@ -18,16 +18,16 @@ class Player(CircleShape):
         c = self.position - forward * self.radius + right
         return [a, b, c]
 
-    def draw(self, screen):
+    def draw(self, screen: pygame.Surface) -> None:
         color = (255, 255, 255)
         pygame.draw.polygon(screen, color, self.triangle(), width=2)
         pass
 
-    def rotate(self, dt):
+    def rotate(self, dt: float) -> None:
         self.rotation += PLAYER_TURN_SPEED * dt
         pass
 
-    def update(self, dt):
+    def update(self, dt: float) -> None:
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_a] or keys[pygame.K_LEFT] or keys[pygame.K_h]:
@@ -47,7 +47,7 @@ class Player(CircleShape):
             self.move(-dt)
         pass
 
-    def move(self, dt):
+    def move(self, dt: float) -> None:
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * dt
 
@@ -55,5 +55,4 @@ class Player(CircleShape):
         if self.position.distance_to(other.position) <= (self.radius + other.radius):
             return True
         return False
-        pass
 
