@@ -60,8 +60,8 @@ def main():
         for shot in shots:
             for asteroid in asteroids:
                 if asteroid and shot.isColliding(asteroid):
-                    # TODO Break large -> med || med -> small
-                    asteroid.kill()
+                    asteroid.split()
+                    shot.kill()
 
         debug.show_variables(screen)
 
