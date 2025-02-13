@@ -8,6 +8,7 @@ class Player(CircleShape):
     def __init__(self, x: int, y: int) -> None:
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
+        self.timer = 0
         pass
 
     def triangle(self) -> list[tuple[int, int]]:
@@ -47,8 +48,16 @@ class Player(CircleShape):
             # move backward
             self.move(-dt)
 
-        if keys[pygame.K_SPACE]:
-            self.shoot()
+        # Rate limit shots
+        if 0 == self.timer:
+            # Fire shot
+            if keys[pygame.K_SPACE]:
+                self.shoot()
+                self.timer = 0.3
+        elif self.timer > 0:
+            self.timer -= dt
+        else:
+            self.timer = 0
         pass
 
     def move(self, dt: float) -> None:
