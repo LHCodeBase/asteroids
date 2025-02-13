@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import pygame
 from circleshape import CircleShape
-from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED, PLAYER_SHOT_SPEED
+from constants import *
 from shot import Shot
 
 class Player(CircleShape):
@@ -63,6 +63,17 @@ class Player(CircleShape):
     def move(self, dt: float) -> None:
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * dt
+
+        # Keep player on screen
+        if self.y() > SCREEN_HEIGHT:
+            self.position -= pygame.Vector2(0, SCREEN_HEIGHT)
+        if self.y() < 0:
+            self.position += pygame.Vector2(0, SCREEN_HEIGHT)
+        if self.x() > SCREEN_WIDTH:
+            self.position -= pygame.Vector2(SCREEN_WIDTH, 0)
+        if self.x() < 0:
+            self.position += pygame.Vector2(SCREEN_WIDTH, 0)
+            pass
 
     def isColliding(self, other: CircleShape) -> bool:
         if self.position.distance_to(other.position) <= (self.radius + other.radius):

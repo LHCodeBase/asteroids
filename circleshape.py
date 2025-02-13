@@ -13,6 +13,8 @@ class CircleShape(pygame.sprite.Sprite):
         self.position = pygame.Vector2(x, y)
         self.velocity = pygame.Vector2(0, 0)
         self.radius = radius
+        self.x = lambda: self.position[0]
+        self.y = lambda: self.position[1]
 
     def draw(self, screen: pygame.Surface) -> None:
         # sub-classes must override
