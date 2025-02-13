@@ -1,3 +1,4 @@
+from __future__ import annotations # Allow typehint before class is initialized
 import pygame
 
 # Base class for game objects
@@ -22,6 +23,6 @@ class CircleShape(pygame.sprite.Sprite):
         pass
 
     def isColliding(self, other: CircleShape) -> bool:
-        if self.distance_to(other) <= (self.radius + other.radius):
+        if self.position.distance_to(other.position) <= (self.radius + other.radius):
             return True
         return False

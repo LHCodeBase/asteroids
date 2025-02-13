@@ -56,6 +56,13 @@ def main():
             pygame.quit()
             break;
 
+        # Check for asteroid / shot collision
+        for shot in shots:
+            for asteroid in asteroids:
+                if asteroid and shot.isColliding(asteroid):
+                    # TODO Break large -> med || med -> small
+                    asteroid.kill()
+
         debug.show_variables(screen)
 
         pygame.display.flip() # Render screen
