@@ -4,6 +4,8 @@ from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
+from score import Score
+from math import tanh
 if DEBUG:
     import debug
 
@@ -30,6 +32,7 @@ def main():
     keepGoing = True
     screen = pygame.display.set_mode(size=(SCREEN_WIDTH, SCREEN_HEIGHT))
     player = Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2)
+    score_tracker = Score()
     asteroid_field = AsteroidField()
 
     while keepGoing:
@@ -60,10 +63,14 @@ def main():
         for shot in shots:
             for asteroid in asteroids:
                 if asteroid and shot.isColliding(asteroid):
+                    # Add scoring
+                    multiplier = tanh(asteroid.radius // ASTEROID_MIN_RADIUS)
+                    score_tracker.increase(int(40 * multiplier))
                     asteroid.split()
                     shot.kill()
 
         debug.show_variables(screen)
+        score_tracker.render_score(screen)
 
         pygame.display.flip() # Render screen
 
